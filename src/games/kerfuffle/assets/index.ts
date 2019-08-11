@@ -1,4 +1,4 @@
-export var images = {
+export const images = {
     subi: 'subi',
     rain: 'rain',
     thiefBoyIdle: 'thiefBoyIdle',

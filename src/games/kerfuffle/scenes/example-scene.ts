@@ -30,6 +30,7 @@ export class ExampleScene extends Phaser.Scene {
         this.gameOver = false;
 
         this.load.image(images.sky, "./src/games/kerfuffle/assets/sky.png");
+        this.load.image(images.rain, "./src/games/kerfuffle/assets/images/rain.png");
         this.load.image(images.ground, './src/games/kerfuffle/assets/platform.png');
         this.load.image(images.star, './src/games/kerfuffle/assets/star.png');
         this.load.image(images.bomb, './src/games/kerfuffle/assets/bomb.png');
@@ -51,12 +52,12 @@ export class ExampleScene extends Phaser.Scene {
         this.universeMembers.forEach((universeMember) => {
             universeMember.update();
 
-            if (universeMember.iterate) {
-                universeMember.iterate((child) => {
-                    // console.log('child', child);
-                    child.update();
-                });
-            }
+            // if (universeMember.iterate) {
+            //     universeMember.iterate((child) => {
+            //         console.log('child', child);
+            //         child.update();
+            //     });
+            // }
         });
     }
 

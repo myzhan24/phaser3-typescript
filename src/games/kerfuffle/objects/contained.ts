@@ -11,12 +11,25 @@ export class Contained extends Phaser.GameObjects.Container {
         // this.scene.physics.world.enable(this);
     }
 
+    update() {
+        // this.updatePlayer();
+        // this.water.update();
+        for (let child of this.list) {
+            child.update();
+        }
+    }
+
     getMainChild(): GameObject {
         return this.mainChild;
     }
 
+    /**
+     * Rather than returning the bounds of all children, return the bounds of the main child.
+     */
     getBounds() {
-        const gb = (this.mainChild as unknown as GetBounds);
-        return gb ? gb.getBounds() : super.getBounds();
+        // TODO check that this is necessary.
+        // const gb = (this.mainChild as unknown as GetBounds);
+        // return gb ? gb.getBounds() : super.getBounds();
+        return super.getBounds();
     }
 }

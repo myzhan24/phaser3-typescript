@@ -1,14 +1,15 @@
 import {clamp} from "../../../utils/clamp";
 import {DudeConstants, Physics} from "../../../constants/constants";
 import {UniverseSprite} from "./universe-sprite";
+import {Water} from "./water";
 
 export class DudeSprite extends UniverseSprite {
     private cursors: any;
     private inputAccelX: number;
+    private bullets: Water[];
 
     constructor({scene, x, y, asset}) {
         super({scene, x, y, asset});
-        this.inputAccelX = 0;
 
         this.create();
     }
@@ -18,6 +19,7 @@ export class DudeSprite extends UniverseSprite {
     }
 
     private create() {
+        this.inputAccelX = 0;
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
         //  physics properties. Give the little guy a slight bounce.
@@ -27,6 +29,8 @@ export class DudeSprite extends UniverseSprite {
 
         this.createAnimations();
         this.createSfx();
+
+        this.bullets = [];
     }
 
     /**
@@ -78,6 +82,26 @@ export class DudeSprite extends UniverseSprite {
         }
     }
 
+    private shoot(): void {
+        // console.log('dude parent container',this.parentContainer);
+        let wata = new Water({
+            scene: this.scene,
+            parent: this.getSprite(),
+            parentContainer: this.parentContainer
+        });
+        this.scene.add.existing(wata);
+        // this.bullets.push(
+        //
+        // );
+
+        this.parentContainer.add(wata);
+
+        if (!this.sfx.psi.isPlaying) {
+            this.sfx.psi.play();
+        }
+    }
+
+
     private updateKeyBinds() {
         if (this.cursors.space.isDown && this.isGrounded()) {
             // TODO is changing grounded here right?
@@ -93,14 +117,7 @@ export class DudeSprite extends UniverseSprite {
 
         // if (this.keyQ.isDown && !isPresent(this.water)) {
         if (this.cursors.shift.isDown) {
-            // this.add(new Water({
-            //     scene: this.scene,
-            //     parent: this.player,
-            //     parentContainer: this
-            // }));
-            if (!this.sfx.psi.isPlaying) {
-                this.sfx.psi.play();
-            }
+            this.shoot();
         }
 
         if (this.cursors.left.isDown) {
@@ -124,8 +141,13 @@ export class DudeSprite extends UniverseSprite {
         }
     }
 
-    update() {
-        this.updatePlayer();
+    update(): void {
+        if (this.active) {
+            this.updatePlayer();
+        } else {
+
+        }
+
 
         if (this.debugMode) {
             this.log();
@@ -142,58 +164,6 @@ export class DudeSprite extends UniverseSprite {
 
     getAccelMu() {
         return this.isGrounded() ? Physics.groundAccelMu : Physics.airAccelMu;
-    }
-
-    setVectorX(vector) {
-        this.getBody().velocity.x = vector;
-    }
-
-    getBody(): Phaser.Physics.Arcade.Body {
-        return this.getSprite().body as Phaser.Physics.Arcade.Body;
-    }
-
-    getVectorX() {
-        return this.getBody().velocity.x;
-    }
-
-    getVectorY() {
-        return this.getBody().velocity.y;
-    }
-
-    adjustVectorX(value) {
-        this.getBody().velocity.x += value;
-    }
-
-    adjustVectorY(value) {
-        this.getBody().velocity.y += value;
-    }
-
-    setVectorY(vector) {
-        this.getBody().velocity.y = vector;
-    }
-
-    setAccelX(vector) {
-        this.getBody().acceleration.x = vector;
-    }
-
-    setAccelY(vector) {
-        this.getBody().acceleration.y = vector;
-    }
-
-    isGrounded() {
-        return this.getBody().touching.down;
-    }
-
-    getSprite() {
-        return this;
-    }
-
-    getX() {
-        return this.getBody().x;
-    }
-
-    getY() {
-        return this.getBody().y;
     }
 
     log() {
