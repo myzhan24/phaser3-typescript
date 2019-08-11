@@ -9,7 +9,6 @@ export class Contained extends Phaser.GameObjects.Container {
         this.mainChild = mainChild;
 
         // this.scene.physics.world.enable(this);
-        // this.scene.add.existing(this);
     }
 
     getMainChild(): GameObject {
@@ -18,18 +17,6 @@ export class Contained extends Phaser.GameObjects.Container {
 
     getBounds() {
         const gb = (this.mainChild as unknown as GetBounds);
-        if (gb) {
-            return gb.getBounds();
-        }
-
-        return super.getBounds();
+        return gb ? gb.getBounds() : super.getBounds();
     }
-
-    // getBoundsTransformMatrix() {
-    //     return this.mainChild.get
-    // }
-
-    // getHeight() {
-    //     return this.mainChild.displayHeight;
-    // }
 }
