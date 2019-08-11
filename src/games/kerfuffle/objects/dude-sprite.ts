@@ -26,8 +26,8 @@ export class DudeSprite extends UniverseSprite {
         // this.sprite = this.scene.physics.add.sprite(0, 0, this.asset);
 
         //  physics properties. Give the little guy a slight bounce.
-        // this.setBounce(0.1);
-        // this.setCollideWorldBounds(true);
+        this.setBounce(0.1);
+        this.setCollideWorldBounds(true);
 
         this.createAnimations();
         this.createSfx();
