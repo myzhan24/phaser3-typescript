@@ -41,15 +41,12 @@ export class ExampleScene extends Phaser.Scene {
     updateUniverse() {
         this.universeMembers.forEach((universeMember) => {
             universeMember.update();
-            try {
-                if (universeMember.iterate) {
-                    universeMember.iterate((child) => {
-                        console.log('child', child);
-                        child.update();
-                    });
-                }
-            } catch (e) {
-                console.log(e);
+
+            if (universeMember.iterate) {
+                universeMember.iterate((child) => {
+                    console.log('child', child);
+                    child.update();
+                });
             }
         });
     }
