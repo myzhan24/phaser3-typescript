@@ -12,7 +12,7 @@ import { GameScene } from "./scenes/gameScene";
 import {ExampleScene} from "./scenes/example-scene";
 
 const config: Phaser.Types.Core.GameConfig = {
-  title: "Asteroid",
+  title: "Kerfuffle",
   url: "https://github.com/digitsensitive/phaser3-typescript",
   version: "1.0",
   width: 800,
@@ -29,7 +29,10 @@ const config: Phaser.Types.Core.GameConfig = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: false
+      debug: false,
+      gravity: {
+        y: 1600
+      }
     }
   },
   backgroundColor: "#000000",

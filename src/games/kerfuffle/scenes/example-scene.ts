@@ -13,7 +13,8 @@ export class ExampleScene extends Phaser.Scene {
     private player: Phaser.GameObjects.Sprite;
 
     constructor() {
-        super({key: 'ExampleScene'})
+        super({key: 'ExampleScene'});
+        console.log(this);
     }
 
     preload() {
@@ -35,10 +36,12 @@ export class ExampleScene extends Phaser.Scene {
         this.universeMembers.forEach((universeMember) => {
             universeMember.update();
             try {
-                universeMember.iterate((child) => {
-                    console.log('child', child);
-                    child.update();
-                });
+                if (universeMember.iterate) {
+                    universeMember.iterate((child) => {
+                        console.log('child', child);
+                        child.update();
+                    });
+                }
             } catch (e) {
                 console.log(e);
             }
@@ -69,11 +72,14 @@ export class ExampleScene extends Phaser.Scene {
         console.log(this);
         var test = new DudeSprite({
             scene: this,
-            anims: this.anims,
+            x: 100,
+            y: 450,
             asset: images.dude
         });
 
         this.player = test.getSprite();
+        // this.add.existing(this.player);
+        this.addToUniverse(this.player);
         // var xd = this.scene.physics.add.sprite(test);
         // xd.setBounce(0.1);
         // xd.setCollideWorldBounds(true);

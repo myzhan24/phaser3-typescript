@@ -6,21 +6,28 @@ export class DudeSprite extends UniverseSprite {
     private cursors: any;
     private inputAccelX: number;
 
-    constructor({scene, anims, asset}) {
-        super({scene, x: 0, y: 0, asset});
-        this.anims = anims;
+    constructor({scene, x, y, asset}) {
+        super({scene, x, y, asset});
         this.inputAccelX = 0;
 
         this.create();
     }
 
+    private getSceneAnims() {
+        return this.scene.anims;
+    }
+
     private create() {
         this.cursors = this.scene.input.keyboard.createCursorKeys();
+
+        this.scene.physics.world.enable(this);
+        this.scene.add.existing(this);
+
         // this.sprite = this.scene.physics.add.sprite(0, 0, this.asset);
 
         //  physics properties. Give the little guy a slight bounce.
-        this.setBounce(0.1);
-        this.setCollideWorldBounds(true);
+        // this.setBounce(0.1);
+        // this.setCollideWorldBounds(true);
 
         this.createAnimations();
         this.createSfx();
@@ -30,22 +37,22 @@ export class DudeSprite extends UniverseSprite {
      * Our player animations, turning, walking left and walking right.
      */
     createAnimations() {
-        this.anims.create({
+        this.getSceneAnims().create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers(this.asset, {start: 0, end: 3}),
+            frames: this.getSceneAnims().generateFrameNumbers(this.asset, {start: 0, end: 3}),
             frameRate: 10,
             repeat: -1
         });
 
-        this.anims.create({
+        this.getSceneAnims().create({
             key: 'turn',
             frames: [{key: this.asset, frame: 4}],
             frameRate: 20
         });
 
-        this.anims.create({
+        this.getSceneAnims().create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers(this.asset, {start: 5, end: 8}),
+            frames: this.getSceneAnims().generateFrameNumbers(this.asset, {start: 5, end: 8}),
             frameRate: 10,
             repeat: -1
         });
