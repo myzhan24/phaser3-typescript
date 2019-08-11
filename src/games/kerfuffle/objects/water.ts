@@ -6,24 +6,23 @@ import {dist} from "../../../utils/dist";
 import Container = Phaser.GameObjects.Container;
 
 export class Water extends UniverseSprite {
-    private parent: Sprite;
     private parentMass: number;
     private radius: number;
+    private parent = {
+        x: 0,
+        y: 0,
+        displayHeight: 40
+    };
 
-    constructor({scene, parent, parentContainer, asset = images.rain}) {
-        super({scene, x: parent.x, y: parent.y, asset});
-        // this.parentContainer = parentContainer;
+    constructor({scene, asset = images.rain}) {
+        super({scene, x: 0, y: 0, asset});
         this.scene.physics.world.enable(this);
-        // this.scene.add.existing(this);
         this.getBody().setAllowGravity(false);
-        this.parent = parent;
         this.parentMass = 10000;
         this.radius = Math.random() * 100 + this.parent.displayHeight / 2 + 10;
         this.putAroundParent();
-
-        // this.parentContainer.add(this);
-        console.log('water x',this.x,'y',this.y);
-        console.log('water constructor, parentContainer',this.parentContainer);
+        // console.log('water x',this.x,'y',this.y);
+        // console.log('water constructor, parentContainer',this.parentContainer);
     }
 
     putAroundParent() {
@@ -37,14 +36,13 @@ export class Water extends UniverseSprite {
         this.x = this.parent.x + sideX;
         this.y = this.parent.y + sideY;
 
-
         const V = Math.sqrt(this.parentMass / cLength);
         this.setVectorX(sideY / cLength * V);
         this.setVectorY(sideX / cLength * -1 * V);
     }
 
     update() {
-        console.log('water x',this.x,'y',this.y);
+        // console.log('water x',this.x,'y',this.y);
         const sideX = this.x - this.parent.x;
         const sideY = this.y - this.parent.y;
         const cLength = dist(this, this.parent);
@@ -90,5 +88,6 @@ export class Water extends UniverseSprite {
         }
 
         // console.log('water dist', cLength);
+        super.update();
     }
 }

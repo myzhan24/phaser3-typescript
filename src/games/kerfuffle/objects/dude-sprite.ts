@@ -66,7 +66,6 @@ export class DudeSprite extends UniverseSprite {
 
     private updatePlayer() {
         this.updateKeyBinds();
-
         // this.updateVectorInfluences();
 
         if (this.inputAccelX > 0) {
@@ -83,18 +82,9 @@ export class DudeSprite extends UniverseSprite {
     }
 
     private shoot(): void {
-        // console.log('dude parent container',this.parentContainer);
-        let wata = new Water({
-            scene: this.scene,
-            parent: this.getSprite(),
-            parentContainer: this.parentContainer
-        });
-        this.scene.add.existing(wata);
-        // this.bullets.push(
-        //
-        // );
-
-        this.parentContainer.add(wata);
+        this.addContainerChild(new Water({
+            scene: this.scene
+        }));
 
         if (!this.sfx.psi.isPlaying) {
             this.sfx.psi.play();
@@ -145,13 +135,13 @@ export class DudeSprite extends UniverseSprite {
         if (this.active) {
             this.updatePlayer();
         } else {
-
         }
-
 
         if (this.debugMode) {
             this.log();
         }
+
+        super.update();
     }
 
     /**

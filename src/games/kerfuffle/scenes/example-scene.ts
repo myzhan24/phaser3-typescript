@@ -84,17 +84,19 @@ export class ExampleScene extends Phaser.Scene {
         // this.player = this.physics.add.sprite(100, 450, images.dude);
         const dudeSprite = new DudeSprite({
             scene: this,
-            x: 0,
-            y: 0,
+            x: this.constants.startX,
+            y: this.constants.startY,
             asset: images.dude
         });
 
-        this.playerContainer = new Contained(this, this.constants.startX, this.constants.startY, dudeSprite, [
-            dudeSprite
-        ]);
+        // this.playerContainer = new Contained(this, this.constants.startX, this.constants.startY, dudeSprite, [
+        //     dudeSprite
+        // ]);
 
-        this.addToUniverse(this.playerContainer);
-        this.player = this.playerContainer.getMainChild();
+        // this.addToUniverse(this.playerContainer);
+        // this.player = this.playerContainer.getMainChild();
+        this.player = dudeSprite;
+        this.addToUniverse(this.player);
 
         //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
         this.stars = this.physics.add.group({

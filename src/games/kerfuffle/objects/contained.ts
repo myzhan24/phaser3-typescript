@@ -7,7 +7,6 @@ export class Contained extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene, x?: number, y?: number, mainChild?: GameObject, children?: GameObject[]) {
         super(scene, x, y, children);
         this.mainChild = mainChild;
-
         // this.scene.physics.world.enable(this);
     }
 
@@ -17,6 +16,9 @@ export class Contained extends Phaser.GameObjects.Container {
         for (let child of this.list) {
             child.update();
         }
+
+        // this.x++;
+        // console.log('contained velocity', this.body);
     }
 
     getMainChild(): GameObject {

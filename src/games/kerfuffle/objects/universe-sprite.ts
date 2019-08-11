@@ -1,12 +1,40 @@
-export class UniverseSprite extends Phaser.Physics.Arcade.Sprite {
+import Container = Phaser.GameObjects.Container;
+import Sprite = Phaser.Physics.Arcade.Sprite;
+
+export class UniverseSprite extends Sprite {
     protected asset: string;
     protected sfx: any;
     protected debugMode: boolean = false;
+    protected container: Container;
 
     constructor({scene, x, y, asset}) {
         super(scene, x, y, asset);
         this.scene = scene;
         this.asset = asset;
+    }
+
+    update() {
+        if (this.container) {
+            this.container.list.forEach((child) => {
+                child.update();
+            });
+        }
+    }
+
+    addContainerChild(child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]) {
+        if (!this.container) {
+            this.container = new Container(this.scene, this.x, this.y);
+            this.scene.add.existing(this.container);
+
+            this.scene.events.on('postupdate', (() => {
+                if (this.container) {
+                    this.container.x = this.x;
+                    this.container.y = this.y;
+                }
+            }));
+        }
+
+        this.container.add(child);
     }
 
     setVectorX(vector) {
