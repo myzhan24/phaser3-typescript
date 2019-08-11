@@ -36,7 +36,7 @@ export class DudeSprite extends UniverseSprite {
     /**
      * Our player animations, turning, walking left and walking right.
      */
-    createAnimations() {
+    private createAnimations() {
         this.getSceneAnims().create({
             key: 'left',
             frames: this.getSceneAnims().generateFrameNumbers(this.asset, {start: 0, end: 3}),
@@ -58,13 +58,13 @@ export class DudeSprite extends UniverseSprite {
         });
     }
 
-    createSfx() {
+    private createSfx() {
         this.sfx = {};
         this.sfx.jump = this.scene.sound.add('jump');
         this.sfx.psi = this.scene.sound.add('psi');
     }
 
-    updatePlayer() {
+    private updatePlayer() {
         this.updateKeyBinds();
 
         // this.updateVectorInfluences();
@@ -82,7 +82,7 @@ export class DudeSprite extends UniverseSprite {
         }
     }
 
-    updateKeyBinds() {
+    private updateKeyBinds() {
         if (this.cursors.space.isDown && this.isGrounded()) {
             // TODO is changing grounded here right?
             // this.isGrounded() = false;
