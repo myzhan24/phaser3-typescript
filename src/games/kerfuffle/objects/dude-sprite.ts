@@ -146,39 +146,43 @@ export class DudeSprite extends UniverseSprite {
     }
 
     setVectorX(vector) {
-        this.getSprite().body.velocity.x = vector;
+        this.getBody().velocity.x = vector;
+    }
+
+    getBody(): Phaser.Physics.Arcade.Body {
+        return this.getSprite().body as Phaser.Physics.Arcade.Body;
     }
 
     getVectorX() {
-        return this.getSprite().body.velocity.x;
+        return this.getBody().velocity.x;
     }
 
     getVectorY() {
-        return this.getSprite().body.velocity.y;
+        return this.getBody().velocity.y;
     }
 
     adjustVectorX(value) {
-        this.getSprite().body.velocity.x += value;
+        this.getBody().velocity.x += value;
     }
 
     adjustVectorY(value) {
-        this.getSprite().body.velocity.y += value;
+        this.getBody().velocity.y += value;
     }
 
     setVectorY(vector) {
-        this.getSprite().body.velocity.y = vector;
+        this.getBody().velocity.y = vector;
     }
 
     setAccelX(vector) {
-        this.getSprite().body.acceleration.x = vector;
+        this.getBody().acceleration.x = vector;
     }
 
     setAccelY(vector) {
-        this.getSprite().body.acceleration.y = vector;
+        this.getBody().acceleration.y = vector;
     }
 
     isGrounded() {
-        return this.getSprite().body.touching.down;
+        return this.getBody().touching.down;
     }
 
     getSprite() {
@@ -186,11 +190,11 @@ export class DudeSprite extends UniverseSprite {
     }
 
     getX() {
-        return this.getSprite().body.x;
+        return this.getBody().x;
     }
 
     getY() {
-        return this.getSprite().body.y;
+        return this.getBody().y;
     }
 
     log() {
