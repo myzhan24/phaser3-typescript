@@ -4,7 +4,7 @@ var phaser = path.join(pathToPhaser, 'dist/phaser.js');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  entry: './src/games/snake/game.ts',
+  entry: './src/games/kerfuffle/game.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
