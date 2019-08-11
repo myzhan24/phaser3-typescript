@@ -14,7 +14,7 @@ export class Water extends UniverseSprite {
         super({scene, x: parent.x, y: parent.y, asset});
         // this.parentContainer = parentContainer;
         this.scene.physics.world.enable(this);
-        this.scene.add.existing(this);
+        // this.scene.add.existing(this);
         this.getBody().setAllowGravity(false);
         this.parent = parent;
         this.parentMass = 10000;
