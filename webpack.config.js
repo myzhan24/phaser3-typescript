@@ -1,9 +1,10 @@
 var path = require('path');
 var pathToPhaser = path.join(__dirname, '/node_modules/phaser/');
 var phaser = path.join(pathToPhaser, 'dist/phaser.js');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  entry: './src/boilerplate/game.ts',
+  entry: './src/games/snake/game.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -26,5 +27,19 @@ module.exports = {
     alias: {
       phaser: phaser
     }
-  }
+  },
+  watch: true,
+  plugins: [
+    // new webpack.DefinePlugin({
+    //   CANVAS_RENDERER: JSON.stringify(true),
+    //   WEBGL_RENDERER: JSON.stringify(true)
+    // }),
+    new BrowserSyncPlugin({
+      host: '127.0.0.1' || 'localhost',
+      port: 8080 || 3000,
+      server: {
+        baseDir: ['./', './build']
+      }
+    })
+  ],
 };
