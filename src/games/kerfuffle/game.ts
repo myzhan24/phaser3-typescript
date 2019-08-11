@@ -9,6 +9,7 @@ import "phaser";
 import { BootScene } from "./scenes/bootScene";
 import { MainMenuScene } from "./scenes/mainMenuScene";
 import { GameScene } from "./scenes/gameScene";
+import {ExampleScene} from "./scenes/example-scene";
 
 const config: Phaser.Types.Core.GameConfig = {
   title: "Asteroid",
@@ -18,7 +19,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 600,
   type: Phaser.AUTO,
   parent: "game",
-  scene: [BootScene, MainMenuScene, GameScene],
+  scene: [BootScene, MainMenuScene, GameScene, ExampleScene],
   input: {
     keyboard: true,
     mouse: false,
