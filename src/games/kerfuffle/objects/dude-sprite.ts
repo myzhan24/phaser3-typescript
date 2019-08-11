@@ -130,7 +130,8 @@ export class DudeSprite extends UniverseSprite {
 
     update() {
         this.updatePlayer();
-        this.log();
+
+        // this.log();
     }
 
     /**
