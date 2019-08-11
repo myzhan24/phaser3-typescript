@@ -26,6 +26,12 @@ export class ExampleScene extends Phaser.Scene {
         this.load.image(images.star, './src/games/kerfuffle/assets/star.png');
         this.load.image(images.bomb, './src/games/kerfuffle/assets/bomb.png');
         this.load.spritesheet(images.dude, './src/games/kerfuffle/assets/dude.png', {frameWidth: 32, frameHeight: 48});
+
+        this.load.audio('sfx', '/src/games/kerfuffle/assets/audio/SoundEffects/8.mp3');
+        this.load.audio('cursor1', '/src/games/kerfuffle/assets/audio/SoundEffects/cursor1.wav');
+        this.load.audio('cursor2', '/src/games/kerfuffle/assets/audio/SoundEffects/cursor2.wav');
+        this.load.audio('jump', '/src/games/kerfuffle/assets/audio/SoundEffects/jump.mp3');
+        this.load.audio('psi', '/src/games/kerfuffle/assets/audio/SoundEffects/psi.wav');
     }
 
     addToUniverse(universeMember) {
