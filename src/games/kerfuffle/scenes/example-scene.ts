@@ -1,6 +1,7 @@
 
 import {images} from '../assets'
 import {DudeSprite} from "../objects/dude-sprite";
+import GameObject = Phaser.GameObjects.GameObject;
 
 export class ExampleScene extends Phaser.Scene {
     private score: number;
@@ -10,7 +11,7 @@ export class ExampleScene extends Phaser.Scene {
     private stars: Phaser.Physics.Arcade.Group;
     private bombs: Phaser.Physics.Arcade.Group;
     private scoreText: Phaser.GameObjects.Text;
-    private player: Phaser.GameObjects.Sprite;
+    private player: GameObject;
 
     constructor() {
         super({key: 'ExampleScene'});
@@ -72,15 +73,14 @@ export class ExampleScene extends Phaser.Scene {
         // this.cursors = this.input.keyboard.createCursorKeys();
         // The player and its settings
         // this.player = this.physics.add.sprite(100, 450, images.dude);
-        console.log(this);
-        var test = new DudeSprite({
+
+        this.player = new DudeSprite({
             scene: this,
             x: 100,
             y: 450,
             asset: images.dude
         });
 
-        this.player = test.getSprite();
         // this.add.existing(this.player);
         this.addToUniverse(this.player);
         // var xd = this.scene.physics.add.sprite(test);
