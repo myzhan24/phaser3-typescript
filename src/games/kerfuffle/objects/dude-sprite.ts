@@ -20,12 +20,8 @@ export class DudeSprite extends UniverseSprite {
     private create() {
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
-        this.scene.physics.world.enable(this);
-        this.scene.add.existing(this);
-
-        // this.sprite = this.scene.physics.add.sprite(0, 0, this.asset);
-
         //  physics properties. Give the little guy a slight bounce.
+        this.scene.physics.world.enable(this);
         this.setBounce(0.1);
         this.setCollideWorldBounds(true);
 
@@ -131,7 +127,9 @@ export class DudeSprite extends UniverseSprite {
     update() {
         this.updatePlayer();
 
-        // this.log();
+        if (this.debugMode) {
+            this.log();
+        }
     }
 
     /**

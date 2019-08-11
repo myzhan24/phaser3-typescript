@@ -2,8 +2,15 @@
 import {images} from '../assets'
 import {DudeSprite} from "../objects/dude-sprite";
 import GameObject = Phaser.GameObjects.GameObject;
+import {Contained} from "../objects/contained";
 
 export class ExampleScene extends Phaser.Scene {
+
+    private constants = {
+        startX: 100,
+        startY: 450
+    };
+
     private score: number;
     private universeMembers: Array<any>;
     private gameOver:boolean;
@@ -11,11 +18,11 @@ export class ExampleScene extends Phaser.Scene {
     private stars: Phaser.Physics.Arcade.Group;
     private bombs: Phaser.Physics.Arcade.Group;
     private scoreText: Phaser.GameObjects.Text;
+    private playerContainer: Contained;
     private player: GameObject;
 
     constructor() {
         super({key: 'ExampleScene'});
-        console.log(this);
     }
 
     preload() {
@@ -36,6 +43,7 @@ export class ExampleScene extends Phaser.Scene {
     }
 
     addToUniverse(universeMember) {
+        this.add.existing(universeMember);
         this.universeMembers.push(universeMember);
     }
 
@@ -45,7 +53,7 @@ export class ExampleScene extends Phaser.Scene {
 
             if (universeMember.iterate) {
                 universeMember.iterate((child) => {
-                    console.log('child', child);
+                    // console.log('child', child);
                     child.update();
                 });
             }
@@ -73,25 +81,19 @@ export class ExampleScene extends Phaser.Scene {
         // this.cursors = this.input.keyboard.createCursorKeys();
         // The player and its settings
         // this.player = this.physics.add.sprite(100, 450, images.dude);
-
-        this.player = new DudeSprite({
+        const dudeSprite = new DudeSprite({
             scene: this,
-            x: 100,
-            y: 450,
+            x: 0,
+            y: 0,
             asset: images.dude
         });
 
-        // this.add.existing(this.player);
-        this.addToUniverse(this.player);
-        // var xd = this.scene.physics.add.sprite(test);
-        // xd.setBounce(0.1);
-        // xd.setCollideWorldBounds(true);
+        this.playerContainer = new Contained(this, this.constants.startX, this.constants.startY, dudeSprite, [
+            dudeSprite
+        ]);
 
-        // var container = new Phaser.GameObjects.Container(this, 100, 450);
-        // container.add(test.getSprite());
-        // this.add.existing(container);
-        // this.addToUniverse(container);
-
+        this.addToUniverse(this.playerContainer);
+        this.player = this.playerContainer.getMainChild();
 
         //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
         this.stars = this.physics.add.group({
