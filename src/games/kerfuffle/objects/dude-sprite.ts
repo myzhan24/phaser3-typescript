@@ -2,11 +2,14 @@ import {clamp} from "../../../utils/clamp";
 import {DudeConstants, Physics} from "../../../constants/constants";
 import {UniverseSprite} from "./universe-sprite";
 import {Water} from "./water";
+import {Battle} from "../school/battle";
 
 export class DudeSprite extends UniverseSprite {
     private cursors: any;
     private inputAccelX: number;
     private bullets: Water[];
+
+    private battle: Battle = new Battle();
 
     constructor({scene, x, y, asset}) {
         super({scene, x, y, asset});
@@ -94,6 +97,7 @@ export class DudeSprite extends UniverseSprite {
 
     private updateKeyBinds() {
         if (this.cursors.space.isDown && this.isGrounded()) {
+            this.battle.go();
             // TODO is changing grounded here right?
             // this.isGrounded() = false;
 

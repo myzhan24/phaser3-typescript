@@ -3,6 +3,7 @@ import {images} from '../assets'
 import {DudeSprite} from "../objects/dude-sprite";
 import GameObject = Phaser.GameObjects.GameObject;
 import {Contained} from "../objects/contained";
+import {Battle} from "../school/battle";
 
 export class ExampleScene extends Phaser.Scene {
 
