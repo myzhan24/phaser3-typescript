@@ -20,7 +20,7 @@ export abstract class AbstractFighter implements Fightable {
         dodge: 0
     };
 
-    constructor(name) {
+    constructor(name = 'Abstract Fighter') {
         this.name = name;
         this.skills = new SubjectSkills(name);
     }
@@ -42,7 +42,7 @@ export abstract class AbstractFighter implements Fightable {
     }
 
     getSkillLevel(subject: Subject): number {
-        return this.skills.getSkillLevel(subject);
+        return this.getSkills().getSkillLevel(subject);
     }
 
     takeDamage(damage: number): void {
@@ -59,6 +59,10 @@ export abstract class AbstractFighter implements Fightable {
 
     getPrimarySubject(): Subject {
         return this.skills.getBestSubject();
+    }
+
+    getSkills(): SubjectSkills {
+        return this.skills;
     }
 
 }

@@ -6,6 +6,7 @@ import {Rollable} from "./rollable";
 export interface Fightable {
     getName(): string;
     getHp(): number;
+    getSkills(): SubjectSkills;
     getSkillLevel(subject: Subject): number;
     getStats(): Stats;
     isDead(): boolean;

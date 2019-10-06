@@ -7,8 +7,7 @@ export class TestA extends AbstractFighter implements Test {
     problems: Array<Problem>;
 
     constructor() {
-        super();
-        this.name = 'Test A';
+        super('Test A');
         this.problems = [];
         const problemFactory = new ProblemFactory();
         this.problems.push(problemFactory.build());

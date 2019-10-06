@@ -21,6 +21,7 @@ export class SubjectSkills {
                 if(name) console.log(key, '=', this.skillLevels[key]);
             }
         });
+        this.bestSubject = bestSubject;
     }
 
     getSkillLevel(subject: Subject) {

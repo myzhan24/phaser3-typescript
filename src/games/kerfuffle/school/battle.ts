@@ -1,8 +1,6 @@
 import {RandomFighter} from "./random-fighter";
-import {TestA} from "./test-a";
 import {Fightable} from "./fightable";
 import {HitCalculator} from "./hit-calculator";
-import {Subject} from "./subject";
 import {Logger} from "./logger";
 
 export class Battle {
@@ -13,14 +11,14 @@ export class Battle {
 
     go() {
         this.jeff = new RandomFighter('Jeff');
-        this.test = new TestA();
-        while (!this.jeff.isDead() && !this.test.isDead()) {
+        this.test = new RandomFighter('Test A');
+        while (!this.done()) {
             console.log('------------------------------------------------------');
-            this.hitCalc.attack(this.jeff, this.test, Subject.Math);
+            this.hitCalc.attack(this.jeff, this.test);
             if (this.jeff.isDead() || this.test.isDead()) {
                 break;
             }
-            this.hitCalc.attack(this.test, this.jeff, Subject.Science);
+            this.hitCalc.attack(this.test, this.jeff);
         }
         console.log('------------------------------------------------------');
 
@@ -33,13 +31,13 @@ export class Battle {
     }
 
     step() {
-        while (!this.jeff.isDead() && !this.test.isDead()) {
+        while (!this.done()) {
             console.log('------------------------------------------------------');
-            this.hitCalc.attack(this.jeff, this.test, Subject.Math);
+            this.hitCalc.attack(this.jeff, this.test);
             if (this.jeff.isDead() || this.test.isDead()) {
                 break;
             }
-            this.hitCalc.attack(this.test, this.jeff, Subject.Science);
+            this.hitCalc.attack(this.test, this.jeff);
         }
         console.log('------------------------------------------------------');
 

@@ -30,10 +30,7 @@ export class HitCalculator {
         return ret;
     }
 
-    attack(a: Fightable, b: Fightable, subject: Subject) {
-
-
-
+    attack(a: Fightable, b: Fightable, subject: Subject = a.getSkills().getBestSubject()) {
         const didHit = this.hit(a.getSkillLevel(subject), b.getSkillLevel(subject));
         this.logger.log(`${a.getName()} attempts to attack ${b.getName()} in ${Subject[subject]}...`);
         if (didHit) {

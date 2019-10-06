@@ -3,6 +3,7 @@ import {Subject} from "./subject";
 import {Stats} from "./stats";
 import {Dice} from "./dice";
 import {Rollable} from "./rollable";
+import {SubjectSkills} from "./subject-skills";
 
 export class Party implements Fightable {
     members = [];
@@ -72,6 +73,10 @@ export class Party implements Fightable {
         if (member) {
             member.takeDamage(hp);
         }
+    }
+
+    getSkills(): SubjectSkills {
+        return this.getNextMember().getSkills();
     }
 
 }
