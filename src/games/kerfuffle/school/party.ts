@@ -4,6 +4,7 @@ import {Stats} from "./stats";
 import {Dice} from "./dice";
 import {Rollable} from "./rollable";
 import {SubjectSkills} from "./subject-skills";
+import first = Phaser.Display.Canvas.CanvasPool.first;
 
 export class Party implements Fightable {
     members = [];
@@ -27,7 +28,8 @@ export class Party implements Fightable {
     }
 
     getNextMember(): Fightable {
-        return this.getFirstMember();
+        const firstMember = this.getFirstMember();
+        return firstMember ? firstMember : this;
     }
 
     getHp(): number {
@@ -55,16 +57,29 @@ export class Party implements Fightable {
     }
 
     getStats(): Stats {
-        return undefined;
+        return {
+                dmgLo: 0,
+            dmgHi: 0,
+            dodge: 0,
+            hit: 0,
+            crit: 0,
+            hp: 0,
+            mp: 0,
+            maxHp: 0,
+            maxMp: 0
+            };
     }
 
     isDead(): boolean {
-        const first = this.getNextMember();
-        if (first) {
-            return first.isDead();
-        }
+        let allDead = true;
+        this.members.some((member)=>{
+            if(!member.isDead()) {
+                allDead = false;
+                return true;
+            }
+        });
 
-        return true;
+        return allDead;
     }
 
     rollDamage(): Rollable {
@@ -86,5 +101,4 @@ export class Party implements Fightable {
     getCurrentFighter(): Fightable {
         return this.getNextMember();
     }
-
 }
