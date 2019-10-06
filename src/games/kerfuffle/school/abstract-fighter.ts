@@ -20,8 +20,9 @@ export abstract class AbstractFighter implements Fightable {
         dodge: 0
     };
 
-    constructor() {
-        this.skills = new SubjectSkills(this.name);
+    constructor(name) {
+        this.name = name;
+        this.skills = new SubjectSkills(name);
     }
 
     getHp(): number {
