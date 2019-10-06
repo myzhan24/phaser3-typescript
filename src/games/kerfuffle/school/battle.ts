@@ -27,8 +27,30 @@ export class Battle {
         const deadGuy = this.entity.isDead() ? this.entity : this.test;
         const aliveGuy = this.entity.isDead() ? this.test : this.entity;
 
-        this.logger.log(`${deadGuy.name} has died.`);
-        this.logger.log(`${aliveGuy.name} wins~`);
+        this.logger.log(`${deadGuy.getName()} has died.`);
+        this.logger.log(`${aliveGuy.getName()} wins~`);
 
+    }
+
+    step() {
+        while (!this.entity.isDead() && !this.test.isDead()) {
+            console.log('------------------------------------------------------');
+            this.hitCalc.attack(this.entity, this.test, Subject.Math);
+            if (this.entity.isDead() || this.test.isDead()) {
+                break;
+            }
+            this.hitCalc.attack(this.test, this.entity, Subject.Science);
+        }
+        console.log('------------------------------------------------------');
+
+        const deadGuy = this.entity.isDead() ? this.entity : this.test;
+        const aliveGuy = this.entity.isDead() ? this.test : this.entity;
+
+        this.logger.log(`${deadGuy.getName()} has died.`);
+        this.logger.log(`${aliveGuy.getName()} wins~`);
+    }
+
+    done(): boolean {
+        return this.entity.isDead() || this.test.isDead()
     }
 }
