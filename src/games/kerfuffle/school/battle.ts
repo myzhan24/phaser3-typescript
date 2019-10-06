@@ -12,29 +12,18 @@ export class Battle {
     go() {
         this.jeff = new RandomFighter('Jeff');
         this.test = new RandomFighter('Test A');
-        while (!this.done()) {
-            console.log('------------------------------------------------------');
-            this.hitCalc.attack(this.jeff, this.test);
-            if (this.jeff.isDead() || this.test.isDead()) {
-                break;
-            }
-            this.hitCalc.attack(this.test, this.jeff);
-        }
-        console.log('------------------------------------------------------');
 
-        const deadGuy = this.jeff.isDead() ? this.jeff : this.test;
-        const aliveGuy = this.jeff.isDead() ? this.test : this.jeff;
-
-        this.logger.log(`${deadGuy.getName()} has died.`);
-        this.logger.log(`${aliveGuy.getName()} wins~`);
-
+        console.log('======================================================');
+        console.log('====',this.jeff.getName(),'and',this.test.getName(),'want to fight! ====');
+        console.log('======================================================');
+        this.step();
     }
 
     step() {
         while (!this.done()) {
             console.log('------------------------------------------------------');
             this.hitCalc.attack(this.jeff, this.test);
-            if (this.jeff.isDead() || this.test.isDead()) {
+            if (this.done()) {
                 break;
             }
             this.hitCalc.attack(this.test, this.jeff);
