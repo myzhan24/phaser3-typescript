@@ -22,11 +22,11 @@ export class Battle {
     step() {
         while (!this.done()) {
             console.log('------------------------------------------------------');
-            this.hitCalc.attack(this.jeff, this.test);
+            this.hitCalc.attack(this.jeff, this.test, this.test.getSkills().getBestSubject());
             if (this.done()) {
                 break;
             }
-            this.hitCalc.attack(this.test, this.jeff);
+            this.hitCalc.attack(this.test, this.jeff, this.test.getSkills().getBestSubject());
         }
         console.log('------------------------------------------------------');
 
