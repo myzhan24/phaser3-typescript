@@ -4,7 +4,6 @@ import {Stats} from "./stats";
 import {Dice} from "./dice";
 import {Rollable} from "./rollable";
 import {SubjectSkills} from "./subject-skills";
-import first = Phaser.Display.Canvas.CanvasPool.first;
 
 export class Party implements Fightable {
     members = [];
