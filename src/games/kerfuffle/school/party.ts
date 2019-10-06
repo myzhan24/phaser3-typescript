@@ -60,7 +60,11 @@ export class Party implements Fightable {
 
     isDead(): boolean {
         const first = this.getNextMember();
-        return !!first;
+        if (first) {
+            return first.isDead();
+        }
+
+        return true;
     }
 
     rollDamage(): Rollable {
@@ -77,6 +81,10 @@ export class Party implements Fightable {
 
     getSkills(): SubjectSkills {
         return this.getNextMember().getSkills();
+    }
+
+    getCurrentFighter(): Fightable {
+        return this.getNextMember();
     }
 
 }

@@ -12,4 +12,5 @@ export interface Fightable {
     isDead(): boolean;
     rollDamage(): Rollable;
     takeDamage(hp: number): void;
+    getCurrentFighter(): Fightable;
 }

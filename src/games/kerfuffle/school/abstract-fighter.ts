@@ -65,4 +65,8 @@ export abstract class AbstractFighter implements Fightable {
         return this.skills;
     }
 
+    getCurrentFighter(): Fightable {
+        return this;
+    }
+
 }
