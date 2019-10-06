@@ -8,7 +8,7 @@ export class SubjectSkills {
 
         if (name) console.log('<><><><>',name,'skill sheet','<><><><>');
         let bestSkillLevel = 0;
-        let bestSubject: Subject;
+        let bestSubject: Subject = Subject.Math;
         Object.values(Subject).forEach((key) => {
             if (!this.skillLevels[key]) {
                 const lvl  = this.getRandomSkillLevel();

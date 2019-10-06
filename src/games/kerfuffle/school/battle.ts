@@ -23,7 +23,7 @@ export class Battle {
 
 
         console.log('======================================================');
-        console.log('====',this.getPlayerFighter().getName(),'and',this.test.getName(),'want to fight! ====');
+        console.log('====',this.party.getName(),'and',this.test.getName(),'want to fight! ====');
         console.log('======================================================');
         this.step();
     }
@@ -39,8 +39,8 @@ export class Battle {
         }
         console.log('------------------------------------------------------');
 
-        const deadGuy = this.getPlayerFighter().isDead() ? this.getPlayerFighter() : this.test;
-        const aliveGuy = this.getPlayerFighter().isDead() ? this.test : this.getPlayerFighter();
+        const deadGuy = this.getPlayerFighter().isDead() ? this.party : this.test;
+        const aliveGuy = this.getPlayerFighter().isDead() ? this.test : this.party;
 
         this.logger.log(`${deadGuy.getName()} has died.`);
         this.logger.log(`${aliveGuy.getName()} wins~`);
@@ -51,6 +51,6 @@ export class Battle {
     }
 
     getPlayerFighter(): Fightable {
-        return this.party.getCurrentFighter();
+        return this.party.getCurrentFighter() ? this.party.getCurrentFighter() : this.party;
     }
 }
